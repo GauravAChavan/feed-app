@@ -1,0 +1,22 @@
+server.port: 9090
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://admin:root@localhost:27017/feed
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: root
+      database: feed
+caching:
+  redis:
+    server_address: redis://localhost:6379
+    expiry_time: 15
+
+hackernews:
+  api:
+    path:
+      story_id_url: https://hacker-news.firebaseio.com/v0/topstories.json?limitToFirst=500&orderBy="$key"
+      item_url: https://hacker-news.firebaseio.com/v0/item/%s.json

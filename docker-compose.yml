@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mongo-db:
+    image: mongo:latest
+    container_name: "mongo-db"
+    ports:
+      - 27017:27017
+  redis-cache:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+    
+  feed-app:
+    image: feed-app:latest
+    container_name: feed-app
+    environment: 
+      - spring.data.mongodb.host=mongo-db
+      - caching.redis.server_address=redis://redis-cache:6379
+    ports:
+      - 9090:9090
+    links:
+      - mongo-db
+      - redis
